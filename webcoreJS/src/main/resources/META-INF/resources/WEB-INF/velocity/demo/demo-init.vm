@@ -1,0 +1,30 @@
+<style type="text/css">
+.projects-header {
+    width: 60%;
+    text-align: center;
+    margin: 60px 0 10px;
+    font-weight: 200;
+    margin-bottom: 40px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.page-header {
+    padding-bottom: 9px;
+    border-bottom: 1px solid #eee;
+}
+</style>
+
+
+<div class="projects-header page-header">
+	<h2>欢迎使用 供应链电商管理平台</h2>
+	<p>百川汇海，自然天成。汇聚百川，归于大海。</p>
+</div>
+
+<script type="text/javascript">
+$(function(){
+	//清空菜单定位参数
+	eNav.clearForword();
+	$('#breadcrumbNavigateBar').hide();
+});
+</script>

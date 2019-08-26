@@ -1,0 +1,67 @@
+#set($layout="/common/upload/layout.vm")
+#parse("/module/mod-form.vm")
+#parse("/module/mod-upload.vm")
+
+<style>
+.imgPreview{
+	height: 250px;
+	margin-bottom: 10px;
+	padding: 10px;
+	overflow-y: auto;
+}
+.imgPreview img {
+	width: 140px;
+	height: 140px;
+	float: left;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	cursor: pointer;
+	border: 4px solid #DFF0D8;
+}
+.imgPreview img.selected {
+	border: 4px solid #FACC30;
+}
+.heading span{
+	color: green;
+	font-weight: bold;
+}
+#attachmentFileQueue{
+	border: 1px solid #E3E3E3;
+	background-color: #F5F5F5;
+}
+.uploadify-queue-item {
+	background-color: #FFFFFF;
+}
+</style>
+
+<script type="text/javascript" src="$!{BUSIJS_PATH}/common/upload/common-upload.js?version=$!{JS_VERSION}" ></script>
+
+<div class="row-fluid">
+	<div class="span6">
+		<h3 class="heading">上传队列 <small style="color: red;" id="checkMessage"></small></h3>
+		#set($sessionId = $session.getId())
+		<div class="">
+			<div class="uploadifyMainBox" style="">
+				<div id="attachmentFileQueue" class="alert alert-info uploadify-queue" style="height: 250px;"></div>
+				
+				<div class="">
+					<input type="hidden" id="pageSessionId" value="$!{sessionId}">
+					<!-- <a class="btn pull-right" data-loading-text="处理中..." id="btnFileUploaderUpload" href="#"><i class="icon-upload-alt"></i> 文件上传</a> -->
+					<input id="attachmentFileInput" type="file" name="dataReportFile" />
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="span6">
+		<h3 class="heading">已上传文件 / 图片 <span id="uploadSuccessCount">0</span> </h3>
+		
+		<div class="alert alert-success imgPreview" style="" id="imgPreviewBox"></div>
+		
+		<div>
+			<a class="btn btn-success pull-right" id="btnUploadDone" style="margin-left: 5px;"><i class="icon-ok"></i> 完成上传</a>
+			<a class="btn btn-danger pull-right" id="btnUploadRemove" style="margin-left: 5px;"><i class="icon-trash"></i> 移除</a>
+		</div>
+	</div>
+
+</div>

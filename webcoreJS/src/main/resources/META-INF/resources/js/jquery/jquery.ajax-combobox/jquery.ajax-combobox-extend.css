@@ -1,0 +1,140 @@
+@charset "utf-8";
+
+div.ac_container input.ac_input{
+	font-size: 14px;
+	height: 20px;
+	line-height: 20px;
+	min-height: 20px;
+	padding: 4px 6px;
+	vertical-align: middle;
+	display: block;
+	box-sizing: content-box;
+	/* width: 100%; */
+}
+/*输入框设置了input-block-level样式时的特殊情况修复*/
+div.ac_container input.ac_input.input-block-level{
+	box-sizing:border-box;
+	height: 30px;
+	line-height: 30px;
+	min-height: 30px;
+	width: 100%;
+}
+
+div.ac_container {
+	vertical-align: middle;
+}
+div.ac_container_open .ac_input {
+    border-radius: 0px 0px 0 0 !important;
+}
+div.ac_container_open .ac_input::-ms-clear{display:none;}
+/* 移除微软浏览器，在输入框输入文本后，会出现X的问题，but is look like not working */
+input::-ms-clear{display:none;}/*隐藏文本框叉子*/
+input::-ms-reveal{display:none;}/*隐藏密码框小眼睛*/
+div.ac_button {
+	border-bottom-right-radius: 0px;
+    border-top-right-radius: 0px;
+    /* border: 1px solid #CCCCCC; */
+    border: 0px;
+    border-left: 0px;
+    width: 24px;
+    height: 29px;
+    /* right: 24px; */
+    padding: 0px;
+    vertical-align: middle;
+    line-height: 100%;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+div.ac_btn_out,div.ac_btn_on {
+	background: none;
+}
+div.ac_button span.caret {
+	position: absolute;
+	top: 50%;
+	right: 12px;
+	margin-top: -1px;
+    vertical-align: middle;
+}
+div.ac_result_area {
+	width: 300px;
+}
+div.ac_result_area.shadowDown{
+	box-shadow: 0px 10px 30px rgba(0,0,0,0.5);
+	-moz-box-shadow: 0px 10px 30px rgba(0,0,0,0.5);
+	-webkit-box-shadow: 0px 10px 30px rgba(0,0,0,0.5);	
+}
+div.ac_result_area.shadowUp{
+	box-shadow: 0px -5px 30px rgba(0,0,0,0.5);
+	-moz-box-shadow: 0px -5px 30px rgba(0,0,0,0.5);
+	-webkit-box-shadow: 0px -5px 30px rgba(0,0,0,0.5);
+}
+div.ac_navi > p {
+	font-size: 12px;
+}
+ul.ac_results > li {
+	font-size: 12px;
+	color: black;
+	cursor : pointer;
+}
+ul.ac_results > li.ac_over {
+	background-color: #53A4EA;
+}
+ul.ac_results > li.ac_selected {
+	color: blue;
+}
+
+
+
+
+/**
+ * 分页条样式
+ */
+div.ac_result_area div.pagination {
+	margin: 0px;
+	padding: 0px;
+	height: 25px;
+	line-height: 25px;
+	width: 100%;
+	border-top: 1px solid #DDDDDD;
+}
+div.ac_result_area div.pagination ul {
+	width: 100%;
+}
+div.ac_result_area div.pagination li{
+	text-align: center;
+}
+div.ac_result_area div.pagination>ul>li>a {
+	margin: 0px;
+	border-radius: 0px;
+	border-top: 0px;
+	border-bottom: 0px;
+	padding: 0px;
+}
+
+div.ac_result_area div.pagination li.csFirstPage a,
+div.ac_result_area div.pagination li.csPreviousPage a,
+div.ac_result_area div.pagination li.csNextPage a,
+div.ac_result_area div.pagination li.csLastPage a {
+	width: 30px;
+}
+div.ac_result_area div.pagination li.csFirstPage a{
+	border-left: 0px;
+}
+div.ac_result_area div.pagination li.csLastPage a{
+	border-right: 0px;
+}
+
+div.ac_result_area div.pagination>ul>li.disabled>a:hover {
+	color: #999999;background-color: white;
+}
+div.ac_result_area div.pagination>ul>li>a:hover {
+	color: #005580; background-color: #F5F5F5;
+}
+
+div.ac_result_area div.pagination>ul>li.pageInfoBox>a {
+	width: 176px;
+	text-align: center;
+	/* padding-left: 4px;
+	padding-right: 4px; */
+}

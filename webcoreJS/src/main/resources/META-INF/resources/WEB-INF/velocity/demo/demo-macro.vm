@@ -1,0 +1,110 @@
+#parse("/module/mod-form.vm")
+
+<h3 class="heading">宏命令Demo页</h3>
+            <div class="formBox">
+				<form id="detailInfoForm" class="form-horizontal  required-validate" style="margin-bottom: 0px;" method="post" action="$!{CONTEXT_PATH}/demo/saveform">
+					<div class="formSep">
+						<div class="control-group">
+							<div class="controls">
+								<span>根据参数，下拉框展示(第一种)，效果：</span>
+								#select("SYS_MENU_TYPE","demoCode",false,"")
+								<br/><span><b>代码：</b></span><br/>
+							    <span style="color:red">\#select("SYS_MENU_TYPE","demoCode",false,"")</span><br/>
+								<span><b>说明：</b></span><br/>
+							    <span style="color:red">1)入参：参数Key，需要生成的select标签的id/name , 是否必填， 选中值<span><br/>
+								<span style="color:red">2)根据参数Key，生成对应参数的下拉选择框，生成的代码中包括了select标签部分；并包含一个“请选择”的选项<span>
+							</div>
+						</div>
+					</div>
+					<div class="formSep">
+						<div class="control-group">
+							<div class="controls">
+								<span>根据参数，下拉框展示(第二种)，效果：</span>
+								<select id="demo-select">
+									#listParam("SYS_MENU_TYPE","")
+                                </select><br/>
+                                <span><b>代码：</b></span><br/>
+								<span style="color:red">&lt;select id="demo-select"&gt; \#listParam("SYS_MENU_TYPE","") &lt;/select&gt;</span><br/>
+								<span><b>说明：</b></span><br/>
+								<span style="color:red">1)入参：参数Key， 选中值<span><br/>
+								<span style="color:red">2)根据参数Key，生成对应参数的下拉选择框，仅生成下拉框的option部分，具体的select标签要自行编写<span>
+							</div>
+						</div>
+					</div>
+					
+					<div class="formSep">
+						<div class="control-group">
+							<div class="controls">
+								<span>根据参数Key，参数编码，翻译为中文：</span>
+									0：#translate("SYS_MENU_TYPE","0");1：#translate("SYS_MENU_TYPE","1")
+                                <br/>
+								<span><b>代码：</b></span><br/>
+								<span style="color:red">\#translate("SYS_MENU_TYPE","0")</span><br/>
+								<span><b>说明：</b></span><br/>
+								<span style="color:red">1)入参：参数Key， 编码<span><br/>
+								<span style="color:red">2)根据参数Key，编码，转换为参数值<span>
+							</div>
+						</div>
+					</div>
+					
+					<div class="formSep">
+						<div class="control-group">
+							<div class="controls">
+								<span>将数据转换为金额展示；前面带上￥符号</span>
+									#money(10020);
+                                <br/>
+								<span><b>代码：</b></span><br/>
+								<span style="color:red">\#money(10020)</span><br/>
+								<span><b>说明：</b></span><br/>
+								<span style="color:red">1)入参：带转换的值<span><br/>
+								<span style="color:red">2)参数值/100，前面带上￥<span>
+							</div>
+						</div>
+					</div>
+					
+					<div class="formSep">
+						<div class="control-group">
+							<div class="controls">
+								<span>将数据转换为金额展示；/100 处理</span>
+									#moneyNum(10020);
+                                <br/>
+								<span><b>代码：</b></span><br/>
+								<span style="color:red">\#moneyNum(10020)</span><br/>
+								<span><b>说明：</b></span><br/>
+								<span style="color:red">1)入参：带转换的值<span><br/>
+								<span style="color:red">2)参数值/100<span>
+							</div>
+						</div>
+					</div>
+					
+					<div class="formSep">
+						<div class="control-group">
+							<div class="controls">
+								<span>将数据转换为百分数展示；后面加%</span>
+									#showPercentNum(100.2345);#showPercentNum(100.2545);
+                                <br/>
+								<span><b>代码：</b></span><br/>
+								<span style="color:red">\#showPercentNum(100.2345)；\#showPercentNum(100.2545)</span><br/>
+								<span><b>说明：</b></span><br/>
+								<span style="color:red">1)入参：带转换的值<span><br/>
+								<span style="color:red">2)小数点 后保留1位，后面加%；后面的四舍五入<span>
+							</div>
+						</div>
+					</div>
+					
+					<div class="formSep">
+						<div class="control-group">
+							<div class="controls">
+								<span>将数据转换为百分数展示；不带%</span>
+									#showPercentNumNotPer(100.2345);#showPercentNumNotPer(100.2545);
+                                <br/>
+								<span><b>代码：</b></span><br/>
+								<span style="color:red">\#showPercentNumNotPer(100.2345)；\#showPercentNumNotPer(100.2545)</span><br/>
+								<span><b>说明：</b></span><br/>
+								<span style="color:red">1)入参：带转换的值<span><br/>
+								<span style="color:red">2)小数点 后保留1位，后面的四舍五入<span>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>

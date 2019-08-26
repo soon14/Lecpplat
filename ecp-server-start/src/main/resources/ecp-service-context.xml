@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://code.alibabatech.com/schema/dubbo
+	http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+	http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-3.1.xsd
+	">
+
+	<bean class="com.zengshi.ecp.frame.context.EcpFrameContextHolder"/>
+	<!--动态数据源新增通知
+	<bean id="dataSourceSender" class="com.db.dynamic.DataSourceSender">
+		<property name="topic" value="dynamic_datasource_create"></property>
+	</bean>
+	<bean class="com.db.dynamic.DataSourceFactoryUtil">
+		<property name="dataSourceSender" ref="dataSourceSender"/>
+	</bean>
+	-->
+	<!-- 自动 注入 参数配置 【位置不可移动，切记！！！！】-->
+	<context:component-scan base-package="com.zengshi.ecp"/>
+
+	<!--<context:property-placeholder location="classpath:zknode.properties;classpath:config.properties;classpath:dubbo.properties"/>-->
+	<bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:zknode.properties</value>
+				<value>classpath:config.properties</value>
+				<value>classpath:dubbo.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean name="configProperties" class="com.zengshi.ecp.server.properties.ConfigProperties"/>
+
+	<!--扫描动态bean-->
+	<bean id="beanDefinitionManager" class="com.zengshi.ecp.frame.bean.BeanDefinitionManager" init-method="init" destroy-method="destory" primary="true"/>
+
+	<!--dubbo 服务-->
+	<dubbo:application name="${default.dubbo.appname}" />
+	<dubbo:registry id="ecpRegistry" address="${default.dubbo.registry.address}" protocol="${default.dubbo.registry.protocol}"  file="${default.dubbo.registry.file}" />
+	<dubbo:protocol host="${default.dubbo.ip}" name="${default.dubbo.protocol}" port="${default.dubbo.protocol.port}" />
+	<!--表示这里的 provider 只注册到对应的registry，该provider下的服务 version 与 group 都一致-->
+	<dubbo:provider id="ecpProvider" registry="ecpRegistry" version="${default.dubbo.version}" group="${default.dubbo.group}" timeout="${default.dubbo.provider.timeout}" retries="2" threads="1000" />
+	<!--监控 -->
+	<dubbo:monitor protocol="registry" />
+
+	<dubbo:consumer timeout="${default.dubbo.provider.timeout}" />
+		    
+	<!--服务的AOP引入-->
+	<import resource="classpath*:/ecp-service-aop.xml" />
+	
+	<!--各个域的 spring 服务配置引入-->
+	<import resource="classpath*:/spring/ecp-application-context-*.xml" />
+	
+	<!--各个域的 Dubbo层服务配置引入-->
+	<import resource="classpath*:/dubbo/server/ecp-services-provider-*.xml" />
+	
+	<import resource="classpath*:/db/application-context-db.xml" />
+	
+	<!--各个域的 Dubbo层服务配置引入-->
+	<import resource="classpath*:/dubbo/client/ecp-services-client-*.xml" />
+
+</beans>

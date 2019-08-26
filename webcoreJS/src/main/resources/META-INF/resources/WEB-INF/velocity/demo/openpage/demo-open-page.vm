@@ -1,0 +1,20 @@
+<script type="text/javascript">
+$(function(){
+	$('#pageOpenControlbar').bPage({
+		url : $webroot + '/demo/openPage',
+		totalPage : 10,
+		totalRow : 118,
+		pageSize : 10,
+		pageNumber : 7,
+		asyncLoad : true,
+		asyncTarget : '#pageMainBox',
+		params : {
+			userName : 'zhangsan',
+			age : 42
+		}
+	});
+});
+</script>
+
+
+<div id="pageOpenControlbar"></div>

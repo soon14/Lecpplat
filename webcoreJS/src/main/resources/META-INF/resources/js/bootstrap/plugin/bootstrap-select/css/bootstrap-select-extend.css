@@ -1,0 +1,89 @@
+@CHARSET "UTF-8";
+/* 为了不影响控件的宽度设置，取消本身的宽度设置 */
+.bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+	width: auto;
+}
+div.bootstrap-select{
+	margin-bottom: 10px;
+}
+form div.bootstrap-select{
+	margin-bottom: 0px;
+}
+div.bootstrap-select>.btn, div.bootstrap-select>.dropdown-menu, div.bootstrap-select>.popover {
+    font-size: 14px;
+}
+div.bootstrap-select>.btn{
+	height: 30px;
+	line-height: 30px;
+}
+div.bootstrap-select span.filter-option {
+	color: #555555;
+	line-height: 20px;
+}
+div.bootstrap-select>button.btn:FIRST-CHILD {
+	background-color: white;
+	/*
+	-webkit-border-bottom-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    -webkit-border-top-left-radius: 0px;
+    border-top-left-radius: 0px;
+    -moz-border-radius-bottomleft: 0px;
+    -moz-border-radius-topleft: 0px;
+    -webkit-border-top-right-radius: 0px;
+    border-top-right-radius: 0px;
+    -webkit-border-bottom-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    -moz-border-radius-topright: 0px;
+    -moz-border-radius-bottomright: 0px;
+    */
+    background-image: none;
+    border: 1px solid #CCCCCC;
+}
+div.bootstrap-select>div.dropdown-menu {
+	-webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+}
+div.bootstrap-select .bs-actionsbox .btn-group button {
+    width: 50%;
+}
+
+div.bootstrap-select .btn-group{
+	min-width: 200px;
+}
+
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus,
+.dropdown-submenu:hover > a,
+.dropdown-submenu:focus > a {
+	background-color: #53A4EA;
+	background-image: none;
+}
+.bootstrap-select.btn-group.show-tick .dropdown-menu li.selected a span.check-mark {
+	right: 5px;	
+}
+
+.bootstrap-select.btn-group .dropdown-menu li a.opt {
+	padding-left: 1.5em;
+}
+/* 下拉菜单标题样式，在bootstrap2中没有该样式定义，在bootstrap3中原生就有定义
+ * 此处先添加
+ */
+.dropdown-header {
+    display: block;
+    padding: 3px 20px;
+    font-size: 12px;
+    line-height: 1.42857143;
+    color: #777;
+    white-space: nowrap;
+}
+
+.bootstrap-select.btn-group .dropdown-menu .notify{
+	opacity: 1;
+	background-color: #FFFFE1;
+	color: red;
+	white-space: normal;
+}
+.bootstrap-select.btn-group .dropdown-menu li small {
+	color: #777777;
+}

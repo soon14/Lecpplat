@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-3.1.xsd ">
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:zknode.properties</value>
+                <value>classpath:config.properties</value>
+            </list>
+        </property>
+    </bean>
+	
+    <bean id="cc" class="com.zengshi.paas.ConfigurationCenter" init-method="init">
+        <constructor-arg value="${zk.server.address}"/>
+        <constructor-arg value="P"/>
+        <property name="auth" value="${cc.auth}"/>
+    </bean>
+     
+	<bean id="sqlCache" class="com.zengshi.paas.cache.remote.RemoteCacheSVCImpl" init-method="init">
+        <property name="cc" ref="cc"/>
+        <property name="confPath" value="${sqlCache}"/>
+    </bean>
+    
+<!--
+    <bean id="logic_db_common" class="com.db.logic.LogicDBDataSource" init-method="init">
+        <property name="cc" ref="cc"/>
+        <property name="confPath" value="/com/zengshi/paas/db/oracle/distributeTransaction/logic_db_common"/>
+    </bean>
+-->    
+	<bean id="logic_transaction_db_01" class="com.db.logic.LogicDBDataSource" init-method="init">
+        <property name="cc" ref="cc"/>
+        <property name="confPath" value="${logic_transaction_db_01}"/>
+    </bean>
+    
+    <bean id="logic_transaction_db_02" class="com.db.logic.LogicDBDataSource" init-method="init">
+        <property name="cc" ref="cc"/>
+        <property name="confPath" value="${logic_transaction_db_02}"/>
+    </bean>
+
+    <bean id="dbRule" class="com.db.distribute.DistributedDBRule" init-method="init">
+		<property name="dbType" value="${database.name}" />
+		<property name="tableRules" ref="dbTableMap"></property>
+		<property name="cacheSvc" ref="sqlCache"/>
+	</bean>
+	
+    <bean id="dbTableMap" class="com.zengshi.ecp.frame.utils.DBRuleMap">
+    	<constructor-arg value="classpath*:/spring/distributedRule-*.xml"></constructor-arg>
+    </bean>
+	
+</beans>

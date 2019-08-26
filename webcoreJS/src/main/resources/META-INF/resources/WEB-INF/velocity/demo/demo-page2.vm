@@ -1,0 +1,26 @@
+#parse("/module/mod-page.vm")
+#parse("/sys/sys_param.vm")
+<script type="text/javascript" src="$!{BUSIJS_PATH}/demo/demo-page.js"></script>
+<h3 class="heading">分页栏（同步方式）</h3>
+<div class="row-fluid">
+    <div id="pageMainBox2">
+        <table width="100%" class="table table-condensed">
+            <thead>
+                <tr>
+                    <th>列1</th>
+                    <th>列2</th>
+                </tr>
+            </thead>
+            <tbody>
+                #foreach( $lst in ${gridResult.list})
+                    <tr>
+                        <td>${lst.code}</td>
+                        <td>${lst.info}</td>
+                    </tr>
+                #end
+            </tbody>
+        </table>
+        <div id="pageControlbar2" class="ecppage" data-total-page="${gridResult.totalPage}" data-total-row="${gridResult.totalRow}"  
+            data-page-size="${gridResult.pageSize}" data-page-number="${gridResult.pageNumber}" data-status="begin"></div>
+    </div>
+</div>

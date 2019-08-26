@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.1.xsd
+    http://www.springframework.org/schema/mvc
+    http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+    http://www.springframework.org/schema/util   
+    http://www.springframework.org/schema/util/spring-util-3.1.xsd
+     http://www.springframework.org/schema/aop 
+   http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
+
+	<!-- 配置静态资源，直接映射到对应的文件夹，不被DispatcherServlet处理，3.04新增功能，需要重新设置spring-mvc-3.0.xsd -->
+	<!-- <mvc:default-servlet-handler /> -->
+	
+	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="urlMap">
+			<map>
+				<entry key="/resources/**">
+					<bean
+						class="com.zengshi.butterfly.core.web.spring.resolver.ButterflyThemeResourceHandler"></bean>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<mvc:resources mapping="404.html" location="/404.html" />
+
+	<!-- 配置simpleURLHandlerMapping -->
+	<!-- <bean id="handlerMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping"> 
+		<property name="order" value="1" /> <property name="mappings"> <bean class="org.springframework.beans.factory.config.PropertiesFactoryBean"> 
+		<property name="location"> <value>/WEB-INF/url_mapping.properties</value> 
+		urlMap.properties文件应放在WebRoot目录下! </property> </bean> </property> </bean> -->
+
+
+	<bean id="permission" class="com.zengshi.butterfly.core.security.PermissionAspect"
+		scope="prototype" />
+
+	<!-- annotation 配置 -->
+	<bean name="requestMappingHandlerMapping"
+		class="com.zengshi.butterfly.core.web.RequestMappingHandlerMapping">
+		<!-- <property name="order" value="2" /> -->
+		<property name="interceptors">
+			<list>
+				<bean class="com.zengshi.butterfly.core.web.interceptor.DefaultInterceptor"></bean>
+				<bean class="com.zengshi.ecp.base.mvc.interceptor.JsonResultInterceptor"></bean>
+			</list>
+		</property>
+		<property name="contentNegotiationManager" ref="contentNegotiationManager" />
+	</bean>
+	
+	<!--日期转换-->
+    <bean id="conversionService" class="org.springframework.format.support.DefaultFormattingConversionService"/> 
+    
+    <!-- JSR303 Validator定义 -->
+ 	<!-- spring提供的bean validator接口配置  -->
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">  
+        <property name="providerClass"  value="org.hibernate.validator.HibernateValidator"/>
+        <property name="validationMessageSource" ref="messageSourceWeb"></property>
+    </bean>
+    <bean id="messageSourceWeb" class="com.zengshi.paas.resource.PaasReloadableResourceBundleMessageSource">  
+		<property name="defaultEncoding" value="utf-8" />  
+		<property name="useCodeAsDefaultMessage" value="true" />  
+		<property name="cacheSeconds" value="10"></property>
+		<property name="mappingDirectoryLocations">
+			<map>
+				<entry key="resources" value="classpath*:/resources/**/*.properties"></entry>
+			</map>
+		</property>  
+	</bean>
+    
+	<!-- 处理方法级别上的@RequestMapping注解 -->
+	<bean class="com.zengshi.butterfly.core.web.RequestMappingHandlerAdapter">
+		<!--增加了日期的转换处理-->
+		<property name="webBindingInitializer">  
+            <bean class="org.springframework.web.bind.support.ConfigurableWebBindingInitializer">  
+                <property name="conversionService" ref="conversionService" />
+                <property name ="validator" ref="validator"></property>
+                <property name="messageCodesResolver">
+    				<bean class="org.springframework.validation.DefaultMessageCodesResolver">
+    					<property name="messageCodeFormatter">
+    						<value type="org.springframework.validation.DefaultMessageCodesResolver.Format">POSTFIX_ERROR_CODE</value>
+    					</property>
+    				</bean>
+    			</property>
+            </bean>
+        </property>
+        
+		<property name="order" value="1" />
+		<property name="messageConverters">
+			<list>
+				<bean id="byteArray_hmc"
+					class="org.springframework.http.converter.ByteArrayHttpMessageConverter" />
+				<!-- 默认设置为UTF-8 ，否则的话，返回出现乱码 -->
+				<bean id="string_hmc"
+					class="org.springframework.http.converter.StringHttpMessageConverter">
+					<constructor-arg value="UTF-8"></constructor-arg>
+				</bean>
+
+				<bean id="resource_hmc"
+					class="org.springframework.http.converter.ResourceHttpMessageConverter" />
+				<bean id="source_hmc"
+					class="org.springframework.http.converter.xml.SourceHttpMessageConverter" />
+				<bean id="xmlAwareForm_hmc"
+					class="org.springframework.http.converter.xml.XmlAwareFormHttpMessageConverter" />
+				<bean id="jaxb2RootElement_hmc"
+					class="org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter" />
+				<bean id="jackson_hmc" class="com.zengshi.ecp.base.mvc.converter.EcpMappingJackson2HttpMessageConverter" >
+					<property name = "supportedMediaTypes">
+    					<list>
+    						<value>application/x-www-form-urlencoded;charset=UTF-8</value>
+    						<value>application/json;charset=UTF-8</value>
+    					</list>
+    				</property>
+				</bean>
+			</list>
+		</property>
+		<property name="contentNegotiationManager" ref="contentNegotiationManager" />
+	</bean>
+
+	<!-- 配置默认的试图解析骑 -->
+	<bean id="viewNameTranslator"
+		class="com.zengshi.butterfly.core.web.spring.DefaultRequestToViewNameTranslator" />
+
+	<!-- 配置velocity视图解析器的配置 -->
+	<bean class="com.zengshi.butterfly.core.web.velocity.VelocityConfigurer">
+		<property name="configLocation" value="classpath:velocity.properties" />
+		<property name="velocityProperties">
+			<props>
+				<prop key="eventhandler.referenceinsertion.class">com.zengshi.butterfly.core.velocity.RenderableHandler
+				</prop>
+				<prop key="velocimacro.library">macro/macros.vm</prop>
+				<prop key="input.encoding">UTF-8</prop>
+				<prop key="output.encoding">UTF-8</prop>
+				<prop key="contentType">text/html;charset=UTF-8</prop>
+				<prop key="resource.loader">spring</prop>
+				<prop key="spring.resource.loader.class">org.springframework.ui.velocity.SpringResourceLoader
+				</prop>
+				<prop key="spring.resource.loader.cache">false</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+		<property name="ignoreAcceptHeader" value="true" />
+		<property name="defaultContentType" value="text/html" />
+		<property name="contentNegotiationManager" ref="contentNegotiationManager" />
+
+		<property name="viewResolvers">
+			<list>
+				<!-- velocity 视图 -->
+				<bean name="velocityLayoutViewResolver"
+					class="com.zengshi.butterfly.core.web.spring.VelocityLayoutViewResolver">
+					<property name="order" value="1" />
+					<property name="cache" value="false" />
+					<property name="prefix" value="" />
+					<!-- <property name="suffix" value=".html" /> -->
+					<property name="toolboxConfigLocation" value="/WEB-INF/toolbox.xml" /> <!--toolbox配置文件路径 -->
+					<property name="dateToolAttribute" value="dateTool" />  <!--日期函数名称 -->
+					<property name="numberToolAttribute" value="number" /><!--数字函数名称 -->
+					<property name="exposeSpringMacroHelpers" value="true" />
+					<property name="exposeRequestAttributes" value="true" /><!--是否开放request属性 -->
+					<property name="requestContextAttribute" value="rc" /> <!--request属性引用名称 -->
+					<property name="contentType" value="text/html;charset=UTF-8" />
+					<property name="screenContentKey" value="screen_content" />
+					<property name="allowSessionOverride" value="true"/>
+					<property name="allowRequestOverride" value="true"/>
+					<property name="attributes">
+						<props>
+							<prop key="relase">true</prop><!-- relase;debug -->
+						</props>
+					</property>
+					<property name="controllerRender" ref="controllerRender"></property>
+				</bean>
+				<!-- jsp试图 -->
+				<bean class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+					<property name="prefix" value="/WEB-INF/jsp/" />
+					<property name="suffix" value=".jsp" />
+					<property name="viewClass"
+						value="org.springframework.web.servlet.view.InternalResourceView" />
+				</bean>
+			</list>
+		</property>
+		<property name="defaultViews">
+			<list>
+				<bean class="com.zengshi.ecp.base.mvc.view.EcpMappingJackson2JsonView">
+					<property name="prefixJson" value="false"></property>
+    				<property name="extractValueFromSingleKeyModel" value="true"></property>
+				</bean>
+				<!-- <bean class="org.springframework.web.servlet.view.xml.MarshallingView"> 
+					<property name="marshaller"> <bean class="org.springframework.oxm.xstream.XStreamMarshaller" 
+					p:autodetectAnnotations="true" /> </property> </bean> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="jsonView" class="com.zengshi.ecp.base.mvc.view.EcpMappingJackson2JsonView">
+	</bean>
+
+	<bean id="controllerRender" class="com.zengshi.butterfly.core.velocity.ControllerRender"></bean>
+
+	<bean class="com.zengshi.ecp.base.mvc.resolver.EcpMappingExceptionResolver">
+   		<property name="defaultErrorView" value="error/error"></property>
+   		<property name="defaultStatusCode" value="500"></property>
+   		<property name="statusCodes">
+			<props>
+				<prop key="404.vm">404</prop>
+			</props>
+		</property>
+   		<!--request 参数名-->
+   		<property name="exceptionAttribute" value="exception"></property>
+   	</bean>
+
+	<!-- 上传文件时需要用到的分解器，默认将编码转为utf-8 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="UTF-8" />
+		<!-- 文件大小的最大值（字节）：10MB -->
+		<property name="maxUploadSize" value="524288000" />
+	</bean>
+
+	<bean class="com.zengshi.butterfly.core.web.spring.resolver.ButterflyThemeResolver" />
+
+</beans>

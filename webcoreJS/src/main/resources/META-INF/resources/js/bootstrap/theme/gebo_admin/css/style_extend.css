@@ -1,0 +1,382 @@
+/* ---- Gebo Admin style extend by Terry ---- */
+html {overflow-y: auto;}
+/* select {outline: medium none !important;} */
+input[type="radio"], input[type="checkbox"] {
+    line-height: normal;
+    margin: 0px;
+}
+label,select,select,textarea, 
+input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], 
+input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], 
+input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], 
+.uneditable-input{
+	font-size:12px;
+}
+button,
+input[type="button"],input[type="submit"],input[type="reset"]
+.btn{
+	font-size:14px !important;
+}
+select.input-mini {
+  width: 74px;
+}
+
+select.input-small {
+  width: 104px;
+}
+
+select.input-medium {
+  width: 164px;
+}
+
+select.input-large {
+  width: 224px;
+}
+
+select.input-xlarge {
+  width: 284px;
+}
+
+select.input-xxlarge {
+  width: 544px;
+}
+/* 修改全局的虚线框 */
+select{
+	outline:none!important;
+}
+
+/* 设置左边SideBar的宽度减少 Start */
+/* 设置菜单边条减少宽度 */
+#maincontainer {
+	background-position: -20px 0px; 
+}
+.antiScroll, .antiscroll-content, .antiscroll-inner {
+    width: 220px;
+}
+.sidebar_switch {
+	left: 200px;
+}
+.sidebar {
+	width: 220px;
+}
+.main_content {
+	margin-left: 220px;
+}
+/* 设置左边SideBar的宽度减少 End */
+
+
+.help-block{
+	margin: 0px;
+}
+
+div.main_content div.row-fluid + div.row-fluid {
+	margin-top: 0px;
+}
+
+div.main_content form.form-inline div.row-fluid + div.row-fluid {
+	margin-top: 0px !important;
+}
+
+.bTable {margin-bottom: 10px;}
+.bTable tbody tr.selected td {background-color: #FDECAD !important;}
+.bTable thead tr th.selectColumn {
+	width: 30px;
+	text-align: center !important;
+}
+.bTable tbody tr td.selectColumn {
+	text-align: center !important; 
+}
+.main_content {
+    padding: 54px 10px 10px;
+}
+.open_content {
+	padding: 10px;
+}
+.formBox{
+	clear: left;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	-ms-border-radius: 4px;
+	border-radius: 4px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+.formBox .control-group{
+	margin-bottom: 0px;
+}
+.formBox input[type="text"] + label.error, 
+.formBox input[type="password"] + label.error, 
+.formBox select + label.error, 
+.formBox textarea + label.error {
+    margin-top: 5px;
+    margin-bottom: 0px;
+}
+/* 表单验证信息 */
+.f_error span.error {
+	/*
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    */
+    color: #C62626;
+}
+
+.form-horizontal .control-label {
+    width: 115px;
+	float: left;
+	padding-top: 5px;
+	text-align: right;
+}
+.form-horizontal .controls {
+    margin-left: 125px;
+}
+
+.panel-body {
+	padding: 10px;
+}
+.panel-body form {
+	margin-bottom: 0px;
+}
+.panel-body .control-row {
+	-webkit-box-shadow: inset 0px 1px 0px 0px #fefefe;
+	box-shadow: inset 0px 1px 0px 0px #fefefe;
+	margin: 0;
+	padding-bottom: 10px;
+	padding: 8px 5px;
+	border-width: 1px 0;
+	border-style: solid;
+	border-color: #ddd;
+	background: #f3f3f3;
+}
+.panel-body .control-row label {
+	margin-bottom: 0;
+	line-height: 28px;
+}
+.panel-title {
+	font-weight: 500;
+    line-height: 1.1;
+}
+.well-searchForm {
+	padding: 9px;
+	/* padding-bottom: 4px; */
+	border-radius: 3px;
+	margin: 0px 0px 10px;
+}
+.well-searchForm .control-group{
+	margin-bottom: 0px;
+}
+
+.well-searchForm form.form-horizontal .control-label{
+	/* width: 40%; */
+	width: 95px;
+}
+
+.well-searchForm form.form-horizontal select{
+	width:164px;
+}
+
+.well-searchForm form.form-horizontal .controls{
+	margin-left: 95px;
+}
+.well-searchForm form .row [class*="span"] {
+	margin-left: 0px;
+	margin-bottom: 5px;
+}
+.well-searchForm form .row {
+	margin-left: -30px;
+}
+.well-searchForm form .row-fluid [class*="span"] {
+	margin-left: 0px;
+}
+
+/* 面包屑导航样式调整 */
+.breadcrumb {
+    padding: 3px 10px;
+    margin: 0 0 0px;
+    border-radius: 4px;
+    background-color: transparent;
+}
+
+/* 表单纯文字显示部分样式调整 */
+.form-horizontal .controls.text_line {
+    line-height: 31px;
+}
+
+.clear {
+	clear:both;/*主要使用这个属性来清除浮动*/
+	/*为了不让ie具有一定的空间，个人建议加上下面三个属性*/
+	height: 0;
+	line-height: 0;
+	font-size: 0;
+}
+
+.pagination {
+	display: block;
+	margin: 0px;
+}
+.pagination ul > .countInfo > span,
+.pagination ul > .countInfo > a,
+.pagination ul > .countInfo > a:hover,
+.pagination ul > .countInfo > a:focus {
+	color: #3399f3;
+	cursor: default;
+	background-color: transparent;
+}
+
+/* 去除弹出窗口边框 */
+div.modal {
+	border: none;
+	-webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+	-webkit-box-shadow: 0 15px 30px rgba(0,0,0,0.9);
+	box-shadow: 0 15px 30px rgba(0,0,0,0.9);
+}
+div.modal.fullWidth {
+	width: 100%;
+	-webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+}
+div.modal.fullWidth  div.modal-header{
+	-webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    background-color: white;
+    border-bottom: 0px;
+}
+div.modal.fullWidth  div.modal-header h3{
+	text-align: center;
+}
+div.modal div.modal-header{
+	-webkit-border-top-left-radius: 6px;
+    -moz-border-top-left-radius: 6px;
+    border-top-left-radius: 6px;
+	-webkit-border-top-right-radius: 6px;
+    -moz-border-top-right-radius: 6px;
+    border-top-right-radius: 6px;
+}
+div.modal div.modal-body {
+	padding: 5px;
+	overflow: hidden;
+}
+div.modal div.modal-body iframe{
+	position: relative;
+	display: block;
+}
+div.modal-backdrop, div.modal-backdrop.fade.in {
+	opacity: 0.8;
+	background-color: black;
+}
+div.modal-header button.close {
+	opacity: 0.3;
+	font-size: 26px !important;
+}
+div.modal-header button.close:hover {
+	opacity: 1;
+}
+/*
+Animate.css - http://daneden.me/animate
+Licensed under the ☺ license (http://licence.visualidiot.com/)
+
+Copyright (c) 2012 Dan Eden
+*/
+
+.animated {
+	-webkit-animation-duration: 1s;
+	   -moz-animation-duration: 1s;
+	     -o-animation-duration: 1s;
+	        animation-duration: 1s;
+	-webkit-animation-fill-mode: both;
+	   -moz-animation-fill-mode: both;
+	     -o-animation-fill-mode: both;
+	        animation-fill-mode: both;
+}
+
+@-webkit-keyframes shake {
+	0%, 100% {-webkit-transform: translateX(0);}
+	10%, 30%, 50%, 70%, 90% {-webkit-transform: translateX(-10px);}
+	20%, 40%, 60%, 80% {-webkit-transform: translateX(10px);}
+}
+
+@-moz-keyframes shake {
+	0%, 100% {-moz-transform: translateX(0);}
+	10%, 30%, 50%, 70%, 90% {-moz-transform: translateX(-10px);}
+	20%, 40%, 60%, 80% {-moz-transform: translateX(10px);}
+}
+
+@-o-keyframes shake {
+	0%, 100% {-o-transform: translateX(0);}
+	10%, 30%, 50%, 70%, 90% {-o-transform: translateX(-10px);}
+	20%, 40%, 60%, 80% {-o-transform: translateX(10px);}
+}
+
+@keyframes shake {
+	0%, 100% {transform: translateX(0);}
+	10%, 30%, 50%, 70%, 90% {transform: translateX(-10px);}
+	20%, 40%, 60%, 80% {transform: translateX(10px);}
+}
+
+.shake {
+	-webkit-animation-name: shake;
+	-moz-animation-name: shake;
+	-o-animation-name: shake;
+	animation-name: shake;
+}
+
+
+/* 选项卡下边距减少 */
+.nav {
+    margin-bottom: 10px;
+}
+.nav-header {
+	padding: 3px 0px;
+}
+.navbar .brand {
+	padding-bottom:0;
+	padding-top:0;
+	height: 42px;
+	line-height: 42px;
+}
+.navbar-fixed-top, .navbar-fixed-bottom {z-index:1001;}
+/* 左边菜单导航栏图标样式，宽度统一 */
+/*一级*/
+.sidebar .accordion-group .accordion-heading a i{
+	display: inline-block;
+	width: 1.25em;
+	text-align: center;
+	margin-right: 3px;
+}
+/*二级*/
+.sidebar .accordion-group .nav .nav-header  i{
+	display: inline-block;
+	width: 1.25em;
+	text-align: center;
+	margin-right: 0px;
+}
+/*三级*/
+.sidebar .accordion-group a i{
+	display: inline-block;
+	width: 1.25em;
+	text-align: center;
+	margin-right: 0px;
+}
+/* 菜单图标 */
+.sidebar .accordion-heading .accordion-toggle {
+    padding: 8px 8px;
+}
+
+
+
+/* 2016.07.04 以后新添加样式 */
+.antiscroll-inner {
+    overflow-y: hidden;
+}
+.nav-list li.nav-header {
+	/* border-bottom: 1px solid #DDDDDD; */
+}
+
+/* 2016.10.25 修改 登录窗口 样式 */
+.login_page .login_box {
+	box-shadow: 0 -13px 75px 0 rgba(0, 0, 0, 0.16), 0 -12px 75px 0 rgba(0, 0, 0, 0.12);
+}

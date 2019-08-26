@@ -1,0 +1,6 @@
+#parse("/sys/sys_param.vm")
+<!-- zTree需要引用的脚本、样式库 -->
+<link rel="stylesheet" href="$!{RESOURCE_PATH}/jquery/ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+<!-- 针对新主题风格进行调整图标 -->
+<link rel="stylesheet" href="$!{RESOURCE_PATH}/jquery/ztree/css/custom/zTreeStyle.css" type="text/css">
+<script type="text/javascript" src="$!{RESOURCE_PATH}/jquery/ztree/js/jquery.ztree.all-3.5.min.js"></script>

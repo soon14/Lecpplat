@@ -1,0 +1,109 @@
+@CHARSET "UTF-8";
+.ZebraDialog {
+	z-index: 2001;
+	-webkit-box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+	box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+	-webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    border: 0px;
+    background-color: white;
+}
+.ZebraDialog .ZebraDialog_Title {
+	-webkit-border-top-left-radius: 6px;
+    -moz-border-top-left-radius: 6px;
+	border-top-left-radius: 6px;
+	-webkit-border-top-right-radius: 6px;
+    -moz-border-top-right-radius: 6px;
+	border-top-right-radius: 6px;
+	font-weight: normal;
+}
+.ZebraDialog .ZebraDialog_ButtonsOuter {
+	-webkit-border-bottom-left-radius: 6px;
+    -moz-border-bottom-left-radius: 6px;
+	border-bottom-left-radius : 6px;
+	-webkit-border-bottom-right-radius: 6px;
+    -moz-border-bottom-right-radius: 6px;
+	border-bottom-right-radius : 6px;
+	border-top: 0px;
+}
+.ZebraDialog .ZebraDialog_BodyOuter {
+	border-bottom : 0px;
+}
+.ZebraDialog .ZebraDialog_Body {
+	border-bottom : 0px;
+}
+.ZebraDialogOverlay {
+	z-index: 2000;
+	background-color: black;
+}
+.ZebraDialog .ZebraDialog_Body {
+	padding-top: 20px;
+}
+.ZebraDialog .ZebraDialog_Buttons a {
+	font-weight: normal;
+	-webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+	border-radius: 4px;
+}
+
+/* 大型消息窗口，用于大数据展示 */
+.hugeZebraDialog{
+	width: 800px !important;	
+}
+.hugeZebraDialog div.ZebraDialog_Body{
+	overflow-y: scroll;
+	height: 300px;
+}
+/* 全宽度消息显示（Windows ModernUI 风格） */
+div.ZebraDialog.fullWidthZebraDialog{
+	width: 100%;
+	-webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    background-color: rgba(0,0,0,.8);
+    text-align: center;
+}
+div.ZebraDialog.fullWidthZebraDialog h3.ZebraDialog_Title,
+div.ZebraDialog.fullWidthZebraDialog .ZebraDialog_BodyOuter,
+div.ZebraDialog.fullWidthZebraDialog div.ZebraDialog_ButtonsOuter{
+	display: block;
+	width: 60%;
+	background-color: transparent;
+	left: 20%;
+	position: relative;
+	box-sizing: border-box !important;
+}
+div.ZebraDialog.fullWidthZebraDialog h3.ZebraDialog_Title,
+div.ZebraDialog.fullWidthZebraDialog div.ZebraDialog_ButtonsOuter{
+	-webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+}
+div.ZebraDialog.fullWidthZebraDialog h3.ZebraDialog_Title{
+	color: white;
+	border-bottom: 0px;
+	padding-left: 124px;
+	padding-bottom: 0px;
+	font-size: 25px;
+}
+div.ZebraDialog.fullWidthZebraDialog .ZebraDialog_BodyOuter{
+	color: white;
+}
+div.ZebraDialog.fullWidthZebraDialog .ZebraDialog_BodyOuter div.ZebraDialog_Body{
+	color: #DDDDDD;
+	padding-top: 0px;
+	background-image: none;
+}
+div.ZebraDialog.fullWidthZebraDialog .ZebraDialog_BodyOuter div.ZebraDialog_Body div{
+	padding-top: 5px !important;
+}
+div.ZebraDialog.fullWidthZebraDialog div.ZebraDialog_ButtonsOuter{
+	padding-bottom: 15px;
+}
+div.ZebraDialog.fullWidthZebraDialog div.ZebraDialog_ButtonsOuter .ZebraDialog_Buttons a{
+	background-color: #0866C6;
+	-webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+}

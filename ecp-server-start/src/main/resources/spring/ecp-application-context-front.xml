@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd 
+	 ">
+
+	<bean class="com.zengshi.ecp.server.front.context.ApplicationContextHolder"/>
+
+	<bean name="baseAreaAdminUtil" class="com.zengshi.ecp.server.front.util.BaseAreaAdminUtil">
+		<property name="baseAreaAdminRSV" value="#{ getBeanFactory().containsBean('baseAreaAdminRSV')?@baseAreaAdminRSV:null}"/>
+	</bean>
+
+	<bean name="baseParamUtil" class="com.zengshi.ecp.server.front.util.BaseParamUtil">
+		<property name="baseParamCfgRSV" value="#{ getBeanFactory().containsBean('baseParamCfgRSV')?@baseParamCfgRSV:null}"/>
+	</bean>
+
+	<bean name="sysCfgUtil" class="com.zengshi.ecp.server.front.util.SysCfgUtil">
+		<property name="baseSysCfgRSV" value="#{ getBeanFactory().containsBean('baseSysCfgRSV')?@baseSysCfgRSV:null}"/>
+	</bean>
+</beans>

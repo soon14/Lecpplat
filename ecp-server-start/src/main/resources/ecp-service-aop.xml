@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans     
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd 
+           http://www.springframework.org/schema/aop     
+           http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+           http://www.springframework.org/schema/cache
+	       http://www.springframework.org/schema/cache/spring-cache-3.2.xsd ">
+	
+	<bean id="dubboRequestInterceptor" class="com.zengshi.ecp.server.dubbo.DubboRequestInterceptor" />
+	<!-- 配置aspect -->
+	<aop:config proxy-target-class="true">
+		<!-- 定义切面 -->
+		<aop:aspect id="pointCut1" ref="dubboRequestInterceptor">
+			<!-- 定义pointcut,并写表达式 -->
+			<aop:pointcut id="allMethod"
+				expression="execution(* com.zengshi.ecp..dubbo..impl..*.*(..))" />
+			<!-- 定义advice,织入pointcut -->
+			<aop:before pointcut-ref="allMethod" method="interceptorDubboReq" />
+			<aop:after-throwing pointcut-ref="allMethod" method="afterThrowing" throwing="exception"/>
+			<aop:after  pointcut-ref="allMethod" method="afterDubboReq" />
+		</aop:aspect>
+	</aop:config>
+	
+	<!-- 数据验证 -->
+	<bean id="validationIntercept" class="com.zengshi.paas.validator.interceptor.ValidationInterceptor">
+		<property name="validatorFactroy">
+			<ref bean="validator"/>
+		</property>
+		<property name="interrupt" value="false"></property>
+	</bean>
+	<aop:config>
+		<aop:aspect ref="validationIntercept">
+			<aop:pointcut expression="@annotation(com.zengshi.paas.validator.PaasValid)" id="validPoint"/>
+			<aop:before method="doValid" pointcut-ref="validPoint"/>
+		</aop:aspect>
+	</aop:config>
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+    	<property name="providerClass" value="org.hibernate.validator.HibernateValidator"></property>
+    	<property name="validationMessageSource" ref="messageSource"></property>
+    </bean>
+    <!-- 缓存 -->
+    <cache:annotation-driven cache-manager="cacheManager"/>
+	<bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
+		<property name="caches">
+			<set>
+				<bean class="com.zengshi.paas.cache.spring.RedisCache">
+					<property name="name" value="redis"/>
+				</bean>
+			</set>
+		</property>
+	</bean>
+	<!-- 数据权限-->
+	<bean id="ruleOfDataAuthUtil" class="com.zengshi.ecp.server.auth.RuleOfDataAuthUtil">
+		<property name="ruleOfDataAuth" value="#{ getBeanFactory().containsBean('ruleOfDataAuth')?@ruleOfDataAuth:null}"/>
+	</bean>
+	<bean id="dataAuthInterceptor" class="com.zengshi.ecp.server.auth.DataAuthInterceptor">
+		<property name="noAuthOfUser" value="false"/>
+	</bean>
+	<aop:config>
+		<aop:aspect ref="dataAuthInterceptor">
+			<aop:before method="before" pointcut="@annotation(com.zengshi.ecp.server.auth.DataAuthValid) or @annotation(com.zengshi.ecp.server.auth.DataAuthValids)"/>
+		</aop:aspect>
+	</aop:config>
+
+	<bean id="dataFilterInterceptor" class="com.zengshi.ecp.server.auth.attribute.DataFilterInterceptor"></bean>
+	<aop:config>
+		<aop:aspect ref="dataFilterInterceptor">
+			<aop:after-returning method="afterReturn" pointcut="@annotation(com.zengshi.ecp.server.auth.attribute.DataFilter)" returning="returnValue"></aop:after-returning>
+		</aop:aspect>
+	</aop:config>
+	<bean id="ruleOfDataFilterUtil" class="com.zengshi.ecp.server.auth.attribute.RuleOfDataFilterUtil">
+		<property name="ruleOfDataFilter" value="#{getBeanFactory().containsBean('ruleOfDataFilter')?@ruleOfDataFilter:null}"/>
+	</bean>
+</beans>

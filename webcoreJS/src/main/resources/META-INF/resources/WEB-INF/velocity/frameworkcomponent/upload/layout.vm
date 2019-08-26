@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>供应链电商管理平台</title>
+
+#parse("/sys/sys_param.vm")
+<meta http-equiv="keywords" content="ECP,供应链电商"/>
+<meta http-equiv="description" content="ECP,供应链电商"/>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+<!--<meta content="IE=EmulateIE7" http-equiv="X-UA-Compatible" />-->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Cache-Control" content="no-store"/>
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="-1" />
+
+<meta id="global" contextpath="$!{CONTEXT_PATH}" version="$!{JS_VERSION}"></meta>
+<meta id="mallSiteUrl" contextpath="$!{MALL_SITE_URL}" version="$!{JS_VERSION}"></meta>
+
+
+
+
+<style type="text/css">
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+</style>
+<script type="text/javascript">
+//javascript中使用全局URL基础路径
+var $webroot = '${CONTEXT_PATH}/';
+</script>
+<link href="$!{RESOURCE_PATH}/jquery/zebra_dialog/css/flat/zebra_dialog.css" rel="stylesheet" type="text/css" media="screen"/>
+<link href="$!{RESOURCE_PATH}/jquery/zebra_dialog/zebra_dialog_extend.css" rel="stylesheet" type="text/css" media="screen"/>
+
+<script type="text/javascript" src="$!{RESOURCE_PATH}/jquery/jquery-1.11.3.min.js"></script>
+
+<!--增加关于遮罩的组件-->
+<script type="text/javascript" src="$!{RESOURCE_PATH}/jquery/jquery-blockui/jquery.blockUI.js"></script>
+
+<!-- 辅助jQuery版本升级过渡插件 -->
+<script type="text/javascript" src="$!{RESOURCE_PATH}/jquery/jquery-migrate-1.2.1.min.js"></script>
+
+<!-- <script type="text/javascript" src="$!{RESOURCE_PATH}/framework/website/core/e.layer.js" ></script> -->
+<script type="text/javascript" src="$!{RESOURCE_PATH}/framework/website/core/e.core.js"></script>
+<script type="text/javascript" src="$!{RESOURCE_PATH}/framework/website/core/e.url.js"></script>
+<script type="text/javascript" src="$!{RESOURCE_PATH}/framework/manage/extend/ebc.utils.js"></script>
+
+
+<!-- 消息提示框 -->
+<script type="text/javascript" src="$!{RESOURCE_PATH}/jquery/zebra_dialog/zebra_dialog.src.js"></script>
+<script type="text/javascript" src="$!{RESOURCE_PATH}/framework/website/core/e.dialog.js"></script>
+
+<!-- Bootstrap framework -->
+<link rel="stylesheet" href="$!{RESOURCE_PATH}/bootstrap/core/2.3.2/css/bootstrap.min.css" />
+<link rel="stylesheet" href="$!{RESOURCE_PATH}/bootstrap/extend/css/bootstrap_panel.css" />
+<!-- Font-Awesome -->
+<link rel="stylesheet" href="$!{RESOURCE_PATH}/bootstrap/plugin/font-awesome-3.2.1/css/font-awesome.min.css" />
+<!--[if IE 7]>
+<link rel="stylesheet" href="$!{RESOURCE_PATH}/bootstrap/plugin/font-awesome-3.2.1/css/font-awesome-ie7.min.css">
+<![endif]-->
+
+<!-- gebo color theme-->
+<link rel="stylesheet" href="$!{RESOURCE_PATH}/bootstrap/theme/gebo_admin/css/blue.css" id="link_theme" />
+<!-- main styles -->
+<link rel="stylesheet" href="$!{RESOURCE_PATH}/bootstrap/theme/gebo_admin/css/style.css" />
+<link rel="stylesheet" href="$!{RESOURCE_PATH}/bootstrap/theme/gebo_admin/css/style_extend.css" />
+
+<link rel="stylesheet" href="$!{RESOURCE_PATH}/bootstrap/theme/gebo_admin/css/font.css" />
+
+<!-- Favicon -->
+<!--
+<link rel="shortcut icon" href="favicon.ico" />
+-->
+
+<!-- 使IE8兼容HTML5 -->
+<!--[if lte IE 8]>
+<link rel="stylesheet" href="$!{RESOURCE_PATH}/bootstrap/theme/gebo_admin/css/ie.css" />
+<script src="$!{RESOURCE_PATH}/bootstrap/theme/gebo_admin/js/ie/html5.js"></script>
+<script src="$!{RESOURCE_PATH}/bootstrap/theme/gebo_admin/js/ie/respond.min.js"></script>
+<![endif]-->
+
+
+<!-- Bootstrap兼容IE6浏览器 -->
+<!--[if lte IE 6]>
+<link rel="stylesheet" type="text/css" href="$!{RESOURCE_PATH}/jsLib/bootstrap/iehack/css/bootstrap-ie6.css">
+<link rel="stylesheet" type="text/css" href="$!{RESOURCE_PATH}/jsLib/bootstrap/iehack/css/ie.css">
+<script type="text/javascript" src="$!{RESOURCE_PATH}/jsLib/bootstrap/iehack/bootstrap-ie.js"></script>
+<![endif]-->
+
+
+<!-- hidden elements width/height -->
+<script type="text/javascript" src="$!{RESOURCE_PATH}/jquery/jquery.cookie.js"></script>
+<!-- bootstrap core -->
+<script type="text/javascript" src="$!{RESOURCE_PATH}/bootstrap/core/2.3.2/js/bootstrap.min.js"></script>
+<!-- bootstrap plugins -->
+
+<!-- 滚动条插件 -->
+<script type="text/javascript" src="$!{RESOURCE_PATH}/bootstrap/theme/gebo_admin/lib/antiscroll/antiscroll.js"></script>
+
+<!-- 基于Bootstrap的 -->
+<!-- 基于Bootstrap的弹出窗口 -->
+<script type="text/javascript" src="$!{RESOURCE_PATH}/bootstrap/extend/js/b.dialog.js"></script>
+<!-- 基于Bootstrap的统一表单初始化 -->
+<script type="text/javascript" src="$!{RESOURCE_PATH}/bootstrap/extend/js/b.ui.js"></script>
+
+<!-- 增加控制调试支持，让IE也可以支持在控制台调试 -->
+<script type="text/javascript" src="$!{RESOURCE_PATH}/javascript/console/console.js"></script>
+
+
+
+
+
+
+<script type="text/javascript" src="$!{RESOURCE_PATH}/jquery/jquery.metadata.js"></script>
+<script language="javascript">
+$.metadata.setType("attr", "validate");
+GLOBAL = {
+	WEBROOT:$("#global").attr("contextpath"),
+	VERSION:$("#global").attr("version"),
+	MALLSITEURL:$("#mallSiteUrl").attr("contextpath")
+};
+</script>
+
+</head>
+
+<body>
+
+
+<div id="maincontainer" class="clearfix">
+	<!-- main content -->
+	<div id="contentwrapper">
+		<div class="open_content">
+	    $screen_content
+		</div>
+	</div>
+	<!-- main content -->
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,164 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.zengshi.ecp</groupId>
+		<artifactId>ecpmain</artifactId>
+		<version>0.0.2-RELEASE</version>
+        <relativePath>../../pom.xml</relativePath>
+    </parent>
+    
+	<groupId>com.zengshi.ecp</groupId>
+	<artifactId>ecp-server-start-client</artifactId>
+	<version>0.2.28-RELEASE</version>
+	<packaging>jar</packaging>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+  
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.zengshi.paas</groupId>
+			<artifactId>zenPaaS</artifactId>
+			<version>${zenpaas-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>xerces</groupId>
+			<artifactId>xerces</artifactId>
+			<version>2.4.0</version>
+		</dependency>
+
+		<!-- slf4j -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+
+		<!-- json-lib 
+		<dependency>
+			<groupId>net.sf.json-lib</groupId>
+			<artifactId>json-lib</artifactId>
+			<version>${json-lib.version}</version>
+			<classifier>jdk15</classifier>
+		</dependency>
+		-->
+		
+		<!--<dependency>
+          <groupId>com.alibaba</groupId>
+          <artifactId>fastjson</artifactId>
+          <version>1.2.5</version>
+        </dependency>-->
+        
+        <dependency>
+          <groupId>com.alibaba</groupId>
+          <artifactId>dubbo</artifactId>
+          <version>2.5.3</version>
+          <exclusions>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+			        <artifactId>spring</artifactId>
+				</exclusion>
+			</exclusions>
+        </dependency>
+	</dependencies>
+	
+	<build>
+		<finalName>ecp-server-start-client</finalName>
+		
+		<sourceDirectory>../src/main/java</sourceDirectory>
+		<resources>
+			<resource>
+				<directory>../src/main/resources</directory>
+				<includes>
+					<include>message/**/*.properties</include>
+					<include>spring/ecp-application-context-front.xml</include>
+				</includes>
+			</resource>
+		</resources>
+
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+					<encoding>UTF-8</encoding>
+					<excludes>
+						<exclude>com/zengshi/ecp/server/dubbo/**</exclude>
+					</excludes>
+					<includes>
+						<include>com/zengshi/ecp/server/front/**</include>
+						<include>com/zengshi/ecp/frame/vo/**</include>
+						<include>com/zengshi/ecp/server/auth/IRuleOfDataAuth.java</include>
+						<include>com/zengshi/ecp/server/auth/RuleObject.java</include>
+						<include>com/zengshi/ecp/server/auth/OperatorChar.java</include>
+						<include>com/zengshi/ecp/server/auth/attribute/IRuleOfDataFilter.java</include>
+					</includes>
+				</configuration>
+			</plugin>
+			
+			 
+			<plugin>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+		                <manifest>
+		                    <useUniqueVersions>false</useUniqueVersions>
+		                </manifest>
+                    </archive>
+					<excludes>
+						<exclude>com/zengshi/ecp/server/dubbo/**/*.class</exclude>
+					</excludes>
+					<includes>
+						<include>com/zengshi/ecp/server/front/**</include>
+						<include>com/zengshi/ecp/frame/vo/**</include>
+						<include>com/zengshi/ecp/server/auth/IRuleOfDataAuth.class</include>
+						<include>com/zengshi/ecp/server/auth/RuleObject.class</include>
+						<include>com/zengshi/ecp/server/auth/attribute/IRuleOfDataFilter.class</include>
+						<include>com/zengshi/ecp/server/auth/OperatorChar.class</include>
+						<include>spring/ecp-application-context-front.xml</include>
+						<include>message/**/*.properties</include>
+					</includes>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.2.1</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

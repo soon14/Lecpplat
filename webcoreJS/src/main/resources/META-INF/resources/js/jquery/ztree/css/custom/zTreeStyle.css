@@ -1,0 +1,20 @@
+/*-------------------------------------
+
+zTree 根据现有系统主题对图标风格进行修改
+
+2016.06.13
+
+-------------------------------------*/
+
+
+.ztree li span.button {line-height:0; margin:0; width:16px; height:16px; display: inline-block; vertical-align:middle;
+	border:0 none; cursor: pointer;outline:none;
+	background-color:transparent; background-repeat:no-repeat; background-attachment: scroll;
+	background-image:url("./img/zTreeStandard.png"); *background-image:url("./img/zTreeStandard.gif")}
+
+
+
+
+span.tmpzTreeMove_arrow {width:16px; height:16px; display: inline-block; padding:0; margin:2px 0 0 1px; border:0 none; position:absolute;
+	background-color:transparent; background-repeat:no-repeat; background-attachment: scroll;
+	background-position:-110px -80px; background-image:url("./img/zTreeStandard.png"); *background-image:url("./img/zTreeStandard.gif")}

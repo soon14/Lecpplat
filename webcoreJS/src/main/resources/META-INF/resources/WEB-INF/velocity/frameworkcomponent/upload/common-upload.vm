@@ -1,0 +1,113 @@
+#set($layout="/frameworkcomponent/upload/layout.vm")
+#parse("/sys/sys_param.vm")
+
+<link href="$!{RESOURCE_PATH}/jquery/jquery.fine-uploader/fine-uploader-gallery.min.css" rel="stylesheet" type="text/css" media="screen"/>
+<style>
+.qq-gallery.qq-uploader {
+	padding: 10px;
+}
+.qq-gallery .qq-upload-list {
+	height: 313px;
+	padding: 1px 0px 10px 1px;
+	overflow-x: hidden; 
+}
+.qq-gallery .qq-upload-list li{
+	margin: 0px 10px 10px 0px;
+	height: 180px;
+}
+.qq-gallery .qq-upload-list li.qq-upload-success {
+    background-color: #DFF0D8;
+}
+.qq-gallery .qq-upload-button {
+	background-color: #F8F8F8;
+	border: 1px solid #DDDDDD;
+	color: black;
+}
+.qq-gallery .file-upload-finish {
+	border: 1px solid #12A0EC;
+	background-color: #12A0EC;
+	color: white;
+	cursor: pointer;
+}
+.qq-gallery .info-show {
+	float: left;
+	line-height: 18px;
+	white-space:nowrap;
+	padding: 0px 5px;
+	color: #333333;
+}
+.qq-gallery .info-show span {
+	color: #999999;
+	margin-right: 10px;
+	font-family: 'Consolas';
+}
+</style>
+<script type="text/template" id="eUploadTemplate">
+	<div class="qq-uploader-selector qq-uploader qq-gallery" qq-drop-area-text="将文件拖到这里进行上传……" style="height:100%;">
+		<ul class="qq-upload-list-selector qq-upload-list" role="region" aria-live="polite" aria-relevant="additions removals">
+			<li>
+				<span role="status" class="qq-upload-status-text-selector qq-upload-status-text"></span>
+				<div class="qq-progress-bar-container-selector qq-progress-bar-container">
+					<div role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" class="qq-progress-bar-selector qq-progress-bar"></div>
+				</div>
+				<span class="qq-upload-spinner-selector qq-upload-spinner"></span>
+				<div class="qq-thumbnail-wrapper">
+					<img class="qq-thumbnail-selector" qq-max-size="120" qq-server-scale>
+				</div>
+				<button type="button" class="qq-upload-cancel-selector qq-upload-cancel">X</button>
+				<button type="button" class="qq-upload-retry-selector qq-upload-retry">
+					<span class="qq-btn qq-retry-icon" aria-label="Retry"></span> Retry
+				</button>
+	
+				<div class="qq-file-info">
+					<div class="qq-file-name">
+						<span class="qq-upload-file-selector qq-upload-file"></span>
+						<span class="qq-edit-filename-icon-selector qq-edit-filename-icon" aria-label="Edit filename"></span>
+					</div>
+					<input class="qq-edit-filename-selector qq-edit-filename" tabindex="0" type="text">
+					<span class="qq-upload-size-selector qq-upload-size"></span>
+					<button type="button" class="qq-btn qq-upload-delete-selector qq-upload-delete">
+						<span class="qq-btn qq-delete-icon" aria-label="Delete"></span>
+					</button>
+					<button type="button" class="qq-btn qq-upload-pause-selector qq-upload-pause">
+						<span class="qq-btn qq-pause-icon" aria-label="Pause"></span>
+					</button>
+					<button type="button" class="qq-btn qq-upload-continue-selector qq-upload-continue">
+						<span class="qq-btn qq-continue-icon" aria-label="Continue"></span>
+					</button>
+				</div>
+			</li>
+		</ul>
+
+
+		<div class="qq-upload-drop-area-selector qq-upload-drop-area" qq-hide-dropzone>
+			<span class="qq-upload-drop-area-text-selector"></span>
+		</div>
+
+
+		<div class="qq-upload-button-selector qq-upload-button">
+			<div><i class="icon-folder-open-alt"></i> 选择文件</div>			
+		</div>
+		<div class="info-show">
+			<div>单个文件容量限制：<span id="fileSizeLimit"></span><br/>文件类型：<span id="fileTypeExts"></span></div>
+		</div>
+		<div class="qq-upload-button-selector qq-upload-button file-upload-finish" style="float:right;">
+			<div><i class="icon-ok"></i> 完成</div>			
+		</div>
+
+		<div class="qq-total-progress-bar-container-selector qq-total-progress-bar-container">
+			<div role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" class="qq-total-progress-bar-selector qq-progress-bar qq-total-progress-bar"></div>
+		</div>
+	</div>
+		
+		<!-- 暂时无用 -->
+		<span class="qq-drop-processing-selector qq-drop-processing">
+			<span>Processing dropped files...</span>
+			<span class="qq-drop-processing-spinner-selector qq-drop-processing-spinner"></span>
+		</span>
+</script>
+
+<div id="fileUploaderMainBox" style="height:358px;"></div>
+<script type="text/javascript" src="$!{RESOURCE_PATH}/jquery/jquery.fine-uploader/jquery.fine-uploader.js"></script>
+<script type="text/javascript" src="$!{RESOURCE_PATH}/framework/website/core/e.upload.js"></script>
+<script type="text/javascript" src="$!{BUSIJS_PATH}/frameworkcomponent/upload/common-upload.js?version=$!{JS_VERSION}" ></script>

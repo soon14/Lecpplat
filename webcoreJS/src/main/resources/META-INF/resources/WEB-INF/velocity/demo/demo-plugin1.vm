@@ -1,0 +1,46 @@
+#parse("/module/mod-form.vm")
+#parse("/module/mod-upload.vm")
+
+
+<link rel="stylesheet" href="$!{RESOURCE_PATH}/jquery/highlight/styles/sunburst.css" type="text/css">
+<script type="text/javascript" src="$!{RESOURCE_PATH}/jquery/highlight/highlight.pack.js" ></script>
+
+
+<link rel="stylesheet" href="$!{RESOURCE_PATH}/jquery/jquery-autocomplete/jquery.autocomplete.css" type="text/css">
+<script type="text/javascript" src="$!{RESOURCE_PATH}/jquery/jquery-autocomplete/jquery.autocomplete.js" ></script>
+
+<script type="text/javascript" src="$!{BUSIJS_PATH}/demo/demo-plugin1.js?version=$!{JS_VERSION}" ></script>
+
+<h3 class="heading" >文件上传并预览</h3>
+<ul class="thumbnails">
+	<li class="span3">
+		<div class="thumbnail">
+			<img data-src="holder.js/300x200?text=图片预览区" alt="" id="imgPreview">
+			<div class="caption">
+				<h3>统一文件上传选择器</h3>
+				<p>开发人员可在需要上传文件的地方直接使用，传递接受文件类型、指定单文件上传或批量文件上传模式并设置相应业务回调处理，即可完成文件上传功能！</p>
+				<p>
+					<a id="btnFileUpload" href="javascript:void(0);" class="btn btn-primary">文件上传</a>
+					<a href="#" class="btn">Test</a>
+				</p>
+			</div>
+		</div>
+	</li>
+	<li class="span3">
+		<div class="thumbnail">
+			<img data-src="holder.js/300x200?text=图片预览区" alt="" id="imgPreview1">
+			<div class="caption">
+				<h3>统一文件上传非选择器版</h3>
+				<p>开发人员可在页面中自定义样式，或直接参考DEMO使用</p>
+				<p>版本特性：使用单文件上传、文件选择后自动进行上传，开发人员需要指定文件限制类型，文件大小限制即可！</p>
+				<div style="clear: both;">
+					<input id="attachmentFileInput" type="file" name="dataReportFile" class="pull-left" style="float: left;" />
+					<a href="#" class="btn">Test</a>
+				</div>
+			</div>
+		</div>
+	</li>
+</ul>
+
+<h3 class="heading" >输入自动完成</h3>
+<input type="text" id="textAutocomplete" class="input-large" placeholder="请输入关键字">
